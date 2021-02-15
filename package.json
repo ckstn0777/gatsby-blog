@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "ckstn0777.github.io",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Create a personal blog using gatsby",
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
@@ -14,18 +14,19 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
+    "@emotion/react": "^11.1.5",
     "gatsby": "^2.26.1",
+    "gatsby-plugin-emotion": "^5.4.0",
+    "gatsby-plugin-typescript": "^2.12.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "typescript": "^4.1.5"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
