@@ -1,11 +1,15 @@
-import React from "react"
-import { Global, css } from "@emotion/react"
-import Layout from "../components/Layout"
+import React from 'react'
+import { Global, css } from '@emotion/react'
+import Layout from '../components/Layout'
 
 export default function Home() {
   return (
     <Layout>
-      <div>Hello world!</div>
+      <div
+        style={{ gridColumn: 'center-start / center-end', height: '150rem' }}
+      >
+        Hello world!
+      </div>
       <Global styles={globalStyle} />
     </Layout>
   )
@@ -31,5 +35,16 @@ const globalStyle = css`
     background: linear-gradient(139.17deg, #f5f5f5 0%, #bdbdbd 100%), #bdbdbd;
     font-weight: 300;
     line-height: 1.6;
+  }
+
+  ::-webkit-scrollbar {
+    width: 1.6rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(147, 161, 161, 0.75);
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: none;
   }
 `
