@@ -15,6 +15,8 @@ featuredImage: './images/redux-devtools.png'
 
 redux-thunk는 리덕스에서 비동기 작업을 처리 할 때 가장 많이 사용하는 미들웨어이다. 이 미들웨어를 사용하면 액션 객체가 아닌 **함수를 디스패치 할 수 있다**. redux-thunk는 리덕스의 창시자인 Dan Abramov가 만들었으며, 리덕스 공식 매뉴얼에서도 비동기 작업을 처리하기 위하여 미들웨어를 사용하는 예시를 보여주고 있다.
 
+<!-- end -->
+
 ```javascript
 const thunk = (store) => (next) => (action) =>
   typeof action === 'function'

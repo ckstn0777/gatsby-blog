@@ -1,15 +1,22 @@
 import React from 'react'
 import { Global, css } from '@emotion/react'
 import Layout from '../components/Layout'
+import Thumbnail from '../components/Thumbnail'
+import Card from '../components/Card'
 
 export default function Home() {
   return (
     <Layout>
-      <div
-        style={{ gridColumn: 'center-start / center-end', height: '150rem' }}
-      >
-        Hello world!
-      </div>
+      <section css={sectionStyle}>
+        <Thumbnail
+          mainText="방문해주셔서 감사합니다."
+          subText="소설읽는 개발자 입니다."
+        />
+        <div css={contentStyle}>
+          <Card />
+          <div className="side">카테고리와 태그 넣을 자리</div>
+        </div>
+      </section>
       <Global styles={globalStyle} />
     </Layout>
   )
@@ -46,5 +53,20 @@ const globalStyle = css`
   }
   ::-webkit-scrollbar-track {
     background: none;
+  }
+`
+
+const sectionStyle = css`
+  grid-column: center-start / center-end;
+  min-height: 100rem;
+`
+
+const contentStyle = css`
+  margin-top: 33vh;
+  display: flex;
+
+  .side {
+    flex-basis: 45%;
+    padding: 1rem;
   }
 `
