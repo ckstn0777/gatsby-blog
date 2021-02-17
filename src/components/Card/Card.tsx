@@ -30,7 +30,7 @@ export default function Cards() {
       query {
         allMarkdownRemark(
           sort: { fields: frontmatter___date, order: DESC }
-          limit: 10
+          limit: 5
         ) {
           totalCount
           edges {
@@ -58,11 +58,11 @@ export default function Cards() {
     `
   )
   const { totalCount, edges } = data.allMarkdownRemark
-
+  console.log(totalCount)
   return (
     <div css={articleWrapper}>
       {edges.map(({ node }: NodeType) => (
-        <article css={articleStyle}>
+        <article css={articleStyle} key={node.id}>
           <img src={node.frontmatter.featuredImage.childImageSharp.fluid.src} />
           <div css={articleTextBoxStyle}>
             <h2>{node.frontmatter.title}</h2>

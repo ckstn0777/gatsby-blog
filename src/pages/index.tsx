@@ -3,6 +3,8 @@ import { Global, css } from '@emotion/react'
 import Layout from '../components/Layout'
 import Thumbnail from '../components/Thumbnail'
 import Card from '../components/Card'
+import Category from '../components/Categories'
+import Tags from '../components/Tags'
 
 export default function Home() {
   return (
@@ -14,7 +16,10 @@ export default function Home() {
         />
         <div css={contentStyle}>
           <Card />
-          <div className="side">카테고리와 태그 넣을 자리</div>
+          <div className="side">
+            <Category />
+            <Tags />
+          </div>
         </div>
       </section>
       <Global styles={globalStyle} />
@@ -68,5 +73,9 @@ const contentStyle = css`
   .side {
     flex-basis: 45%;
     padding: 1rem;
+
+    height: 100%;
+    position: sticky;
+    top: 100px;
   }
 `
