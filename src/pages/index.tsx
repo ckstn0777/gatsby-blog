@@ -1,10 +1,10 @@
-import React from 'react'
-import { Global, css } from '@emotion/react'
-import Layout from '../components/Layout'
-import Thumbnail from '../components/Thumbnail'
-import Card from '../components/Card'
-import Category from '../components/Categories'
-import Tags from '../components/Tags'
+import React from 'react';
+import { Global, css } from '@emotion/react';
+import Layout from '../components/Layout';
+import Thumbnail from '../components/Thumbnail';
+import Card from '../components/Card';
+import Category from '../components/Categories';
+import Tags from '../components/Tags';
 
 export default function Home() {
   return (
@@ -24,10 +24,10 @@ export default function Home() {
       </section>
       <Global styles={globalStyle} />
     </Layout>
-  )
+  );
 }
 
-const globalStyle = css`
+export const globalStyle = css`
   // --font-primary:
   *,
   *::before,
@@ -35,6 +35,11 @@ const globalStyle = css`
     margin: 0;
     padding: 0;
     box-sizing: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   html {
@@ -59,23 +64,23 @@ const globalStyle = css`
   ::-webkit-scrollbar-track {
     background: none;
   }
-`
+`;
 
 const sectionStyle = css`
   grid-column: center-start / center-end;
   min-height: 100rem;
-`
+`;
 
 const contentStyle = css`
   margin-top: 33vh;
   display: flex;
 
   .side {
-    flex-basis: 45%;
+    flex-basis: 50%;
     padding: 1rem;
 
     height: 100%;
     position: sticky;
     top: 100px;
   }
-`
+`;

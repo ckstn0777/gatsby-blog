@@ -1,11 +1,15 @@
-import React from 'react'
-import { css } from '@emotion/react'
+import React from 'react';
+import { css } from '@emotion/react';
+import { Link } from 'gatsby';
 
 export default function Header() {
   return (
     <header css={HeaderStyle}>
       <div css={HeaderBoxStyle}>
-        <img src="/image/Logo.png" css={LogoStyle} />
+        <Link to="/">
+          <img src="/image/Logo.png" css={LogoStyle} />
+        </Link>
+
         <ul css={UlStyle}>
           <li>Home</li>
           <li>Categoies</li>
@@ -15,7 +19,7 @@ export default function Header() {
         <input />
       </div>
     </header>
-  )
+  );
 }
 
 const HeaderStyle = css`
@@ -30,7 +34,7 @@ const HeaderStyle = css`
 
   backdrop-filter: blur(3px);
   background-color: rgba(255, 255, 255, 0.562);
-`
+`;
 const HeaderBoxStyle = css`
   display: flex;
   flex-direction: row;
@@ -40,12 +44,12 @@ const HeaderBoxStyle = css`
   max-width: 120rem;
   height: 100%;
   margin: 0 auto;
-`
+`;
 
 const LogoStyle = css`
   max-height: 10rem;
   max-width: 25rem;
-`
+`;
 
 const UlStyle = css`
   flex: 1 0 0;
@@ -55,4 +59,4 @@ const UlStyle = css`
   display: flex;
   justify-content: space-around;
   padding: 0 10rem;
-`
+`;

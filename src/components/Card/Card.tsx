@@ -1,28 +1,28 @@
-import React from 'react'
-import { css } from '@emotion/react'
-import { useStaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import { css } from '@emotion/react';
+import { useStaticQuery, Link, graphql } from 'gatsby';
 // import { PostListQuery } from '../../../gatsby-type'
 
 type NodeType = {
   node: {
-    id: string
-    excerpt: string
+    id: string;
+    excerpt: string;
     fields: {
-      slug: string
-    }
+      slug: string;
+    };
     frontmatter: {
-      title: string
-      date: string
+      title: string;
+      date: string;
       featuredImage: {
         childImageSharp: {
           fluid: {
-            src: string
-          }
-        }
-      }
-    }
-  }
-}
+            src: string;
+          };
+        };
+      };
+    };
+  };
+};
 
 export default function Cards() {
   const data = useStaticQuery(
@@ -56,28 +56,32 @@ export default function Cards() {
         }
       }
     `
-  )
-  const { totalCount, edges } = data.allMarkdownRemark
-  console.log(totalCount)
+  );
+  const { totalCount, edges } = data.allMarkdownRemark;
+  console.log(totalCount);
   return (
     <div css={articleWrapper}>
       {edges.map(({ node }: NodeType) => (
-        <article css={articleStyle} key={node.id}>
-          <img src={node.frontmatter.featuredImage.childImageSharp.fluid.src} />
-          <div css={articleTextBoxStyle}>
-            <h2>{node.frontmatter.title}</h2>
-            <p>{node.excerpt}</p>
-            <p>{node.frontmatter.date}</p>
-          </div>
-        </article>
+        <Link to={node.fields.slug}>
+          <article css={articleStyle} key={node.id}>
+            <img
+              src={node.frontmatter.featuredImage.childImageSharp.fluid.src}
+            />
+            <div css={articleTextBoxStyle}>
+              <h2>{node.frontmatter.title}</h2>
+              <p>{node.excerpt}</p>
+              <p>{node.frontmatter.date}</p>
+            </div>
+          </article>
+        </Link>
       ))}
     </div>
-  )
+  );
 }
 
 const articleWrapper = css`
   padding: 1rem;
-`
+`;
 
 const articleStyle = css`
   background: #ffffff;
@@ -91,7 +95,7 @@ const articleStyle = css`
   /* img {
     border-radius: 20px;
   } */
-`
+`;
 const articleTextBoxStyle = css`
   /* display: flex;
   flex-direction: column;
@@ -102,4 +106,4 @@ const articleTextBoxStyle = css`
   > * {
     margin-bottom: 0.6rem;
   }
-`
+`;
