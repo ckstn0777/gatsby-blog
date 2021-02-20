@@ -1,76 +1,30 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { useStaticQuery, Link, graphql } from 'gatsby';
-// import { PostListQuery } from '../../../gatsby-type'
+import { Link } from 'gatsby';
+import { PostListPEdges } from '../../../gatsby-type';
 
-type NodeType = {
-  node: {
-    id: string;
-    excerpt: string;
-    fields: {
-      slug: string;
-    };
-    frontmatter: {
-      title: string;
-      date: string;
-      featuredImage: {
-        childImageSharp: {
-          fluid: {
-            src: string;
-          };
-        };
-      };
-    };
-  };
+type Props = {
+  post: PostListPEdges;
 };
 
-export default function Cards() {
-  const data = useStaticQuery(
-    graphql`
-      query {
-        allMarkdownRemark(
-          sort: { fields: frontmatter___date, order: DESC }
-          limit: 5
-        ) {
-          totalCount
-          edges {
-            node {
-              id
-              frontmatter {
-                title
-                date(formatString: "DD MMMM, YYYY")
-                featuredImage {
-                  childImageSharp {
-                    fluid(maxWidth: 120, maxHeight: 120) {
-                      src
-                    }
-                  }
-                }
-              }
-              fields {
-                slug
-              }
-              excerpt
-            }
-          }
-        }
-      }
-    `
-  );
-  const { totalCount, edges } = data.allMarkdownRemark;
-  console.log(totalCount);
+export default function Cards({ post }: Props) {
+  const data = post;
+
   return (
     <div css={articleWrapper}>
-      {edges.map(({ node }: NodeType) => (
-        <Link to={node.fields.slug}>
+      {data.allMarkdownRemark.edges.map(({ node }) => (
+        <Link to={node.fields?.slug as string} key={node.id}>
           <article css={articleStyle} key={node.id}>
             <img
-              src={node.frontmatter.featuredImage.childImageSharp.fluid.src}
+              src={
+                node.frontmatter?.featuredImage?.childImageSharp?.fluid
+                  ?.src as string
+              }
             />
             <div css={articleTextBoxStyle}>
-              <h2>{node.frontmatter.title}</h2>
+              <h2>{node.frontmatter?.title}</h2>
               <p>{node.excerpt}</p>
-              <p>{node.frontmatter.date}</p>
+              <p>{node.frontmatter?.date}</p>
             </div>
           </article>
         </Link>

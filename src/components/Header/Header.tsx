@@ -7,7 +7,7 @@ export default function Header() {
     <header css={HeaderStyle}>
       <div css={HeaderBoxStyle}>
         <Link to="/">
-          <img src="/image/Logo.png" css={LogoStyle} />
+          <img src="/Image/Logo.png" css={LogoStyle} />
         </Link>
 
         <ul css={UlStyle}>

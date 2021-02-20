@@ -141,11 +141,13 @@ export const postStyle = css`
 
   ul li {
     margin-left: 19px;
+    margin-bottom: 5px;
     // list-style: circle;
   }
 
   ol li {
     margin-left: 19px;
+    margin-bottom: 5px;
   }
 
   .gatsby-resp-image-wrapper {

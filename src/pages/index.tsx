@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Global, css } from '@emotion/react';
+import { graphql } from 'gatsby';
+
 import Layout from '../components/Layout';
 import Thumbnail from '../components/Thumbnail';
 import Card from '../components/Card';
 import Category from '../components/Categories';
 import Tags from '../components/Tags';
+import Pagenation from '../components/Pagenation';
+import { PostListPQuery } from '../../gatsby-type';
 
-export default function Home() {
+type Props = {
+  data: PostListPQuery;
+};
+
+export default function Home({ data }: Props) {
+  const totalCount = data.allMarkdownRemark.totalCount;
+  console.log(data);
+
   return (
     <Layout>
       <section css={sectionStyle}>
@@ -15,7 +26,10 @@ export default function Home() {
           subText="소설읽는 개발자 입니다."
         />
         <div css={contentStyle}>
-          <Card />
+          <div className="content">
+            <Card post={data} />
+            <Pagenation totalCount={totalCount} />
+          </div>
           <div className="side">
             <Category />
             <Tags />
@@ -82,5 +96,37 @@ const contentStyle = css`
     height: 100%;
     position: sticky;
     top: 100px;
+  }
+`;
+
+export const query = graphql`
+  query PostListP($skip: Int) {
+    allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
+      limit: 5
+      skip: $skip
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD MMMM, YYYY")
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 120, maxHeight: 120) {
+                  src
+                }
+              }
+            }
+          }
+          fields {
+            slug
+          }
+          excerpt
+        }
+      }
+    }
   }
 `;

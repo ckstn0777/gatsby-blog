@@ -1,12 +1,12 @@
-import React from 'react'
-import { css } from '@emotion/react'
+import React from 'react';
+import { css } from '@emotion/react';
 
 export default function Footer() {
   return (
     <footer css={FooterStyle}>
       <div css={FooterBoxStyle}>
         <div css={AboutStyle}>
-          <img src="/image/User.jpg" />
+          <img src="/Image/User.jpg" />
           <div css={AboutBoxStyle}>
             <h3>소설읽는 개발자</h3>
             <p>
@@ -25,7 +25,7 @@ export default function Footer() {
         <p className="copyright">© 2021 소설읽는개발자 Powered by Gatsby</p>
       </div>
     </footer>
-  )
+  );
 }
 
 const FooterStyle = css`
@@ -33,7 +33,7 @@ const FooterStyle = css`
   background-color: #37474f;
   color: white;
   font-size: 1.4rem;
-`
+`;
 const FooterBoxStyle = css`
   max-width: 120rem;
   margin: 0 auto;
@@ -43,7 +43,7 @@ const FooterBoxStyle = css`
     letter-spacing: 2px;
     text-align: center;
   }
-`
+`;
 
 const AboutStyle = css`
   display: flex;
@@ -54,7 +54,7 @@ const AboutStyle = css`
   img {
     border-radius: 15px;
   }
-`
+`;
 
 const AboutBoxStyle = css`
   padding: 0 2rem;
@@ -69,4 +69,4 @@ const AboutBoxStyle = css`
   p {
     flex-basis: 50%;
   }
-`
+`;

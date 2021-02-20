@@ -27,8 +27,10 @@ export default function PostTemplate({ data }: Props) {
             </p>
             <h1 className="article__title">{post?.frontmatter?.title}</h1>
             <div>
-              {post?.frontmatter?.tags?.map((tag) => (
-                <span className="article__tag">{tag}</span>
+              {post?.frontmatter?.tags?.map((tag, idx) => (
+                <span className="article__tag" key={idx}>
+                  {tag}
+                </span>
               ))}
             </div>
             <div
