@@ -8,15 +8,14 @@ import Card from '../components/Card';
 import Category from '../components/Categories';
 import Tags from '../components/Tags';
 import Pagenation from '../components/Pagenation';
-import { PostListPQuery } from '../../gatsby-type';
+import { PostListQuery } from '../../gatsby-type';
 
 type Props = {
-  data: PostListPQuery;
+  data: PostListQuery;
 };
 
 export default function Home({ data }: Props) {
   const totalCount = data.allMarkdownRemark.totalCount;
-  console.log(data);
 
   return (
     <Layout>
@@ -100,7 +99,7 @@ const contentStyle = css`
 `;
 
 export const query = graphql`
-  query PostListP($skip: Int) {
+  query PostList($skip: Int) {
     allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
       limit: 5

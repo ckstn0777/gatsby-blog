@@ -19,9 +19,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 // 페이지 만들기(template과 연결)
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
+
+  //////////////////////////////////
+  // 게시글용 페이지 만들기
   const result = await graphql(`
     query {
       allMarkdownRemark {
+        totalCount
         edges {
           node {
             fields {
@@ -33,7 +37,6 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  // 게시글용 페이지 만들기
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
@@ -46,26 +49,40 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  // 페이지네이션 페이지 만들기
-  const result2 = await graphql(`
-    query {
-      allMarkdownRemark {
-        totalCount
-      }
-    }
-  `);
-
+  //////////////////////////////////
+  // 페이지네이션 페이지(/pages/2) 만들기
   const limit = 5; // 5개씩
-  const page = Math.ceil(result2.data.allMarkdownRemark.totalCount / limit); // 총 페이지 수
-
+  const page = Math.ceil(result.data.allMarkdownRemark.totalCount / limit); // 총 페이지 수
   for (let i = 2; i <= page; i++) {
-    const pagePath = `/pages/${i}`;
     createPage({
-      path: pagePath,
+      path: `/pages/${i}`,
       component: path.resolve(`./src/pages/index.tsx`),
       context: {
         skip: (i - 1) * limit,
       },
     });
   }
+
+  //////////////////////////////////
+  // 카테고리 페이지 만들기
+  const categories = await graphql(`
+    query {
+      allMarkdownRemark {
+        group(field: frontmatter___category) {
+          fieldValue
+        }
+      }
+    }
+  `);
+
+  categories.data.allMarkdownRemark.group.forEach(({ fieldValue }) => {
+    console.log(fieldValue);
+    createPage({
+      path: `/category/${fieldValue}`,
+      component: path.resolve(`./src/templates/category/index.tsx`),
+      context: {
+        category: fieldValue,
+      },
+    });
+  });
 };

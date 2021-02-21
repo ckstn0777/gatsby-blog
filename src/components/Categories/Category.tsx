@@ -1,11 +1,11 @@
-import React from 'react'
-import { css } from '@emotion/react'
-import { useStaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import { css } from '@emotion/react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 
 type CategoryType = {
-  totalCount: number
-  fieldValue: string
-}
+  totalCount: number;
+  fieldValue: string;
+};
 
 export default function Category() {
   const data = useStaticQuery(
@@ -19,22 +19,22 @@ export default function Category() {
         }
       }
     `
-  )
+  );
 
-  const categories = data.allMarkdownRemark.group
+  const categories = data.allMarkdownRemark.group;
   return (
     <div css={categoryWrapper}>
       <h2>카테고리</h2>
       {categories.map(
         ({ totalCount, fieldValue }: CategoryType, idx: number) => (
-          <div key={idx} css={categoryStyle}>
+          <Link to={`/category/${fieldValue}`} key={idx} css={categoryStyle}>
             <p className="category__name">{fieldValue}</p>
             <p className="category__count">{totalCount}</p>
-          </div>
+          </Link>
         )
       )}
     </div>
-  )
+  );
 }
 
 const categoryWrapper = css`
@@ -49,11 +49,16 @@ const categoryWrapper = css`
     text-align: center;
     margin-bottom: 1rem;
   }
-`
+`;
 const categoryStyle = css`
   display: flex;
   font-size: 1.6rem;
   padding: 0.5rem;
+
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 
   .category__name {
     flex: 1 0 0;
@@ -67,4 +72,4 @@ const categoryStyle = css`
     text-align: center;
     color: white;
   }
-`
+`;

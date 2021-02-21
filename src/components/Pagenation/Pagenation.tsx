@@ -15,14 +15,25 @@ function CreatePageNumber(start: number, end: number): Array<number> {
   return PageArray;
 }
 
+function CurrentPage(pathname: string): number {
+  if (pathname === '/') {
+    return 1;
+  } else {
+    if (parseInt(pathname.split('/')[2])) {
+      return parseInt(pathname.split('/')[2]);
+    } else {
+      return 1;
+    }
+  }
+}
+
 export default function Pagenation({ totalCount }: Props) {
   const location = useLocation(); // url 정보를 가져오기 위해
 
   const limit = 5; // 페이지당 5개씩
   const count = 5; // 페이지네이션 번호가 5개씩 끊어서 보여주기
 
-  const page =
-    location.pathname === '/' ? 1 : parseInt(location.pathname.split('/')[2]); // 현재 페이지
+  const page = CurrentPage(location.pathname);
   const totalPage = Math.ceil(totalCount / limit); // 총 페이지 수
 
   // 5개씩 페이지네이션 할 예정

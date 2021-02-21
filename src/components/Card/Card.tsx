@@ -1,10 +1,10 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { Link } from 'gatsby';
-import { PostListPEdges } from '../../../gatsby-type';
+import { PostListQuery } from '../../../gatsby-type';
 
 type Props = {
-  post: PostListPEdges;
+  post: PostListQuery;
 };
 
 export default function Cards({ post }: Props) {

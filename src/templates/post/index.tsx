@@ -12,7 +12,7 @@ type Props = {
 
 export default function PostTemplate({ data }: Props) {
   const post = data.markdownRemark;
-  console.log(post);
+
   return (
     <Layout>
       <section css={sectionStyle}>
