@@ -55,9 +55,46 @@ module.exports = {
               elements: [`h2`, 'h3'], // 링크를 추가할 Header 종류 선택
             },
           },
+          {
+            resolve: 'gatsby-plugin-local-search',
+            options: {
+              name: 'pages', // search 식별자 -> search를 여러개 만들때 구분하기 위함
+              engine: 'lunr',
+              query: `
+                {
+                  allMarkdownRemark {
+                    nodes {
+                      id
+                      frontmatter {
+                        title
+                      }
+                      fields {
+                        slug
+                      }
+                      rawMarkdownBody
+                    }
+                  }
+                }
+              `,
+              ref: 'id', // 각 인덱스 항목을 식별하기 위함
+              // 이 목록은 가능한 짧아야 한다. 인덱스가 작을수록 속도가 빨라진다.
+              // 그러나 검색을 유용하게 만들 수 있는 충분한 콘텐츠를 포함해야 합니다!
+              index: ['title', 'body'],
+              // 결과를 표시할 때 액세스할 필드가 나열
+              store: ['id', 'title', 'slug'],
+              normalizer: ({ data }) =>
+                data.allMarkdownRemark.nodes.map((node) => ({
+                  id: node.id,
+                  title: node.frontmatter.title,
+                  body: node.rawMarkdownBody,
+                  slug: node.fields.slug,
+                })),
+            },
+          },
         ],
       },
     },
+
     // {
     //   resolve: `gatsby-plugin-graphql-codegen`,
     //   options: {

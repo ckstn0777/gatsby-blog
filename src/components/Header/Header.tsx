@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { css } from '@emotion/react';
 import { Link } from 'gatsby';
+import SearchModal from '../SearchModal';
 
 export default function Header() {
+  const [query, setQuery] = useState('');
+  const [modal, setModal] = useState(false);
+
+  const onChangeQuery = useCallback((e) => {
+    setQuery(e.target.value);
+  }, []);
+
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+    setModal(true);
+  }, []);
+
+  const onCloseModal = useCallback(() => {
+    setModal(false);
+  }, []);
+
   return (
     <header css={HeaderStyle}>
       <div css={HeaderBoxStyle}>
@@ -16,7 +33,15 @@ export default function Header() {
           <li>Tags</li>
           <li>About</li>
         </ul>
-        <input />
+        <form onSubmit={onSubmit} css={formStyle}>
+          <input
+            name="query"
+            value={query}
+            onChange={onChangeQuery}
+            placeholder="검색하기🔎"
+          />
+        </form>
+        {modal && <SearchModal query={query} onCloseModal={onCloseModal} />}
       </div>
     </header>
   );
@@ -59,4 +84,10 @@ const UlStyle = css`
   display: flex;
   justify-content: space-around;
   padding: 0 10rem;
+`;
+
+const formStyle = css`
+  input {
+    padding: 0.5rem;
+  }
 `;
