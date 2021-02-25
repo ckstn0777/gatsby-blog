@@ -5,6 +5,7 @@ import Layout from '../../components/Layout';
 import { BlogPostBySlugQuery } from '../../../gatsby-type';
 import { globalStyle } from '../../pages';
 import { postStyle } from './post.style';
+import SEO from '../../components/SEO';
 
 type Props = {
   data: BlogPostBySlugQuery;
@@ -15,6 +16,11 @@ export default function PostTemplate({ data }: Props) {
 
   return (
     <Layout>
+      <SEO
+        title={`${post?.frontmatter?.title} | 소설읽는개발자`}
+        description={post?.excerpt}
+        metaImageUrl={`${post?.frontmatter?.featuredImage?.childImageSharp?.fluid?.src}`}
+      />
       <section css={sectionStyle}>
         <article css={articleStyle}>
           <img

@@ -11,6 +11,7 @@ import Card from '../../components/Card';
 import Pagenation from '../../components/Pagenation';
 import Category from '../../components/Categories';
 import Tags from '../../components/Tags';
+import SEO from '../../components/SEO';
 
 type Props = {
   data: CategoryQuery;
@@ -23,6 +24,7 @@ export default function CategoryTemplate({ data }: Props) {
 
   return (
     <Layout>
+      <SEO title={`${category} | 소설읽는개발자`} />
       <section css={sectionStyle}>
         <Thumbnail
           mainText={category}

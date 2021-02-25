@@ -31,7 +31,7 @@ export default function Header() {
           <li>Home</li>
           <li>Categoies</li>
           <li>Tags</li>
-          <li>About</li>
+          <Link to="/about">About</Link>
         </ul>
         <form onSubmit={onSubmit} css={formStyle}>
           <input

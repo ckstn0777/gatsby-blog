@@ -6,7 +6,7 @@
 
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://ckstn0777.github.io/',
+    siteUrl: 'https://ckstn0777.com/',
     title: `소설읽는 개발자`,
     description: `항상 새로운 기술을 추구합니다. 웹 개발자가 꿈입니다.`,
     author: `ckstn0777`,
@@ -27,6 +27,8 @@ module.exports = {
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    'gatsby-plugin-sitemap',
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {

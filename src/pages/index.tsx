@@ -9,6 +9,7 @@ import Category from '../components/Categories';
 import Tags from '../components/Tags';
 import Pagenation from '../components/Pagenation';
 import { PostListQuery } from '../../gatsby-type';
+import SEO from '../components/SEO';
 
 type Props = {
   data: PostListQuery;
@@ -19,6 +20,7 @@ export default function Home({ data }: Props) {
 
   return (
     <Layout>
+      <SEO />
       <section css={sectionStyle}>
         <Thumbnail
           mainText="방문해주셔서 감사합니다."
