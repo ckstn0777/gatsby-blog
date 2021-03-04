@@ -1,11 +1,12 @@
-import React from 'react'
-import { css } from '@emotion/react'
-import { useStaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import { css } from '@emotion/react';
+import { useStaticQuery, graphql } from 'gatsby';
+import { bg } from '../../utils/bg';
 
 type TagType = {
-  totalCount: number
-  fieldValue: string
-}
+  totalCount: number;
+  fieldValue: string;
+};
 
 export default function Tags() {
   const data = useStaticQuery(
@@ -19,9 +20,9 @@ export default function Tags() {
         }
       }
     `
-  )
+  );
 
-  const tags = data.allMarkdownRemark.group
+  const tags = data.allMarkdownRemark.group;
   return (
     <div css={tagWrapper}>
       <h2>Tags</h2>
@@ -34,7 +35,7 @@ export default function Tags() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 const tagWrapper = css`
@@ -44,11 +45,15 @@ const tagWrapper = css`
   padding: 2rem;
   font-size: 1.2rem;
 
+  @media only screen and (max-width: ${bg.medium}) {
+    flex-basis: 45%;
+  }
+
   h2 {
     text-align: center;
     margin-bottom: 1rem;
   }
-`
+`;
 
 const tagBoxStyle = css`
   display: flex;
@@ -68,4 +73,4 @@ const tagBoxStyle = css`
   }
   .tag__name {
   }
-`
+`;

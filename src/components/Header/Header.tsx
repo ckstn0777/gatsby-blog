@@ -2,10 +2,18 @@ import React, { useState, useCallback } from 'react';
 import { css } from '@emotion/react';
 import { Link } from 'gatsby';
 import SearchModal from '../SearchModal';
+import { bg } from '../../utils/bg';
+import { useMediaQuery } from 'react-responsive';
+import Burger from '../Burger';
+import SlideMenu from '../SlideMenu';
 
 export default function Header() {
   const [query, setQuery] = useState('');
   const [modal, setModal] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // bg.small 아래로 떨어지면 true로 바뀜
+  const isMobile = useMediaQuery({ maxWidth: bg.small });
 
   const onChangeQuery = useCallback((e) => {
     setQuery(e.target.value);
@@ -20,19 +28,28 @@ export default function Header() {
     setModal(false);
   }, []);
 
+  const onChangeMenuOpen = useCallback(() => {
+    setMenuOpen((open) => !open);
+  }, []);
+
   return (
     <header css={HeaderStyle}>
       <div css={HeaderBoxStyle}>
-        <Link to="/">
+        {isMobile && (
+          <Burger open={menuOpen} onChangeMenuOpen={onChangeMenuOpen} />
+        )}
+        <Link to="/" css={LogoLinkStyle}>
           <img src="/Image/Logo.png" css={LogoStyle} />
         </Link>
 
-        <ul css={UlStyle}>
-          <li>Home</li>
-          <li>Categoies</li>
-          <li>Tags</li>
-          <Link to="/about">About</Link>
-        </ul>
+        {!isMobile && (
+          <ul css={UlStyle}>
+            <li>Home</li>
+            <li>Categoies</li>
+            <li>Tags</li>
+            <Link to="/about">About</Link>
+          </ul>
+        )}
         <form onSubmit={onSubmit} css={formStyle}>
           <input
             name="query"
@@ -43,6 +60,9 @@ export default function Header() {
         </form>
         {modal && <SearchModal query={query} onCloseModal={onCloseModal} />}
       </div>
+      {isMobile && (
+        <SlideMenu open={menuOpen} onChangeMenuOpen={onChangeMenuOpen} />
+      )}
     </header>
   );
 }
@@ -59,6 +79,10 @@ const HeaderStyle = css`
 
   backdrop-filter: blur(3px);
   background-color: rgba(255, 255, 255, 0.562);
+
+  @media only screen and (max-width: ${bg.small}) {
+    padding: 1rem 2rem;
+  }
 `;
 const HeaderBoxStyle = css`
   display: flex;
@@ -69,6 +93,12 @@ const HeaderBoxStyle = css`
   max-width: 120rem;
   height: 100%;
   margin: 0 auto;
+`;
+
+const LogoLinkStyle = css`
+  @media only screen and (max-width: ${bg.small}) {
+    flex: 1;
+  }
 `;
 
 const LogoStyle = css`
@@ -84,6 +114,10 @@ const UlStyle = css`
   display: flex;
   justify-content: space-around;
   padding: 0 10rem;
+
+  @media only screen and (max-width: ${bg.medium}) {
+    padding: 3rem;
+  }
 `;
 
 const formStyle = css`

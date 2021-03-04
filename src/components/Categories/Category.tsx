@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
+import { bg } from '../../utils/bg';
 
 type CategoryType = {
   totalCount: number;
@@ -44,6 +45,11 @@ const categoryWrapper = css`
   padding: 2rem;
   margin-bottom: 3rem;
   font-size: 1.2rem;
+
+  @media only screen and (max-width: ${bg.medium}) {
+    flex-basis: 45%;
+    margin-bottom: 0;
+  }
 
   h2 {
     text-align: center;

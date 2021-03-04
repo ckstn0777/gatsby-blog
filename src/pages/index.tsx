@@ -10,6 +10,7 @@ import Tags from '../components/Tags';
 import Pagenation from '../components/Pagenation';
 import { PostListQuery } from '../../gatsby-type';
 import SEO from '../components/SEO';
+import { bg } from '../utils/bg';
 
 type Props = {
   data: PostListQuery;
@@ -43,7 +44,6 @@ export default function Home({ data }: Props) {
 }
 
 export const globalStyle = css`
-  // --font-primary:
   *,
   *::before,
   *::after {
@@ -60,6 +60,10 @@ export const globalStyle = css`
   html {
     box-sizing: border-box;
     font-size: 62.5%; // 10px/16 = 62.5% -> 1rem = 10px
+
+    @media only screen and (max-width: ${bg.largest}) {
+      font-size: 50%;
+    }
   }
 
   body {
@@ -83,12 +87,21 @@ export const globalStyle = css`
 
 const sectionStyle = css`
   grid-column: center-start / center-end;
+  @media only screen and (max-width: ${bg.medium}) {
+    grid-column: full-start / full-end;
+    padding: 0 3rem;
+  }
+
   min-height: 100rem;
 `;
 
 const contentStyle = css`
   margin-top: 33vh;
   display: flex;
+
+  @media only screen and (max-width: ${bg.medium}) {
+    flex-direction: column-reverse;
+  }
 
   .side {
     flex-basis: 50%;
@@ -97,6 +110,12 @@ const contentStyle = css`
     height: 100%;
     position: sticky;
     top: 100px;
+
+    @media only screen and (max-width: ${bg.medium}) {
+      position: static;
+      display: flex;
+      justify-content: space-around;
+    }
   }
 `;
 
